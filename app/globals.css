@@ -1,0 +1,83 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #0A0A0A;
+  color: #F5F5F0;
+  font-family: 'DM Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Animations ── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes scrollPulse {
+  0%   { opacity: 0; transform: scaleY(0); transform-origin: top; }
+  50%  { opacity: 1; transform: scaleY(1); }
+  100% { opacity: 0; transform: scaleY(0); transform-origin: bottom; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Animate hero text on load */
+.hero-animate {
+  animation: fadeUp 0.8s ease both;
+}
+
+/* ── Nav link hover ── */
+nav a:hover { color: #C9A84C !important; }
+
+/* ── Buttons hover ── */
+a[style*="background: rgb(201"]:hover,
+button[style*="background: rgb(201"]:hover {
+  background: #E2C47A !important;
+  transform: translateY(-1px);
+}
+
+/* ── Why card hover ── */
+.why-card:hover {
+  border-top-color: #C9A84C !important;
+}
+
+/* ── Input focus ── */
+input:focus, select:focus, textarea:focus {
+  border-color: #C9A84C !important;
+  outline: none;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #111; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #C9A84C; }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .hero-grid   { grid-template-columns: 1fr !important; }
+  .about-grid  { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .service-panel { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .contact-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+  .why-grid    { grid-template-columns: 1fr 1fr !important; }
+}
+
+@media (max-width: 768px) {
+  nav .nav-links { display: none !important; }
+  nav .burger    { display: flex !important; }
+  .why-grid      { grid-template-columns: 1fr !important; }
+  .service-tabs  { flex-wrap: wrap; }
+  .form-row      { grid-template-columns: 1fr !important; }
+  .footer-inner  { flex-direction: column; align-items: flex-start !important; }
+}
