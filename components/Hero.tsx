@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 // import { STATS } from "../lib/constants";
 
 export default function Hero() {
@@ -87,6 +88,21 @@ export default function Hero() {
     <section className="hero" id="home">
       <canvas ref={canvasRef} className="hero__canvas" />
       <div className="hero__bg" style={{ transform: `translateY(${heroParallax}px)` }}>
+        <Image
+          src="/izwelakhe_landingPic.webp"
+          alt="Izwelakhe background"
+          fill
+          priority
+          quality={100}
+          unoptimized
+          className="hero__bg-image"
+          sizes="100vw"
+          style={{
+            objectFit: "cover",
+            objectPosition: "center",
+            position: "absolute",
+          }}
+        />
         <div className="hero__bg-overlay" />
         <div className="hero__grid-lines" />
       </div>
@@ -110,7 +126,7 @@ export default function Hero() {
         <p className="hero__sub">
           Turning vision into reality — business consulting,
           <br className="hero__br" />
-          construction, and property development across South Africa.
+          construction, and property development across Cape Town.
         </p>
 
         <div className="hero__actions">

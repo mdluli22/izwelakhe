@@ -174,9 +174,17 @@ export const CSS = `
       radial-gradient(ellipse 60% 80% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 50%),
       linear-gradient(170deg, #0d0c08 0%, #090909 50%, #0a0a08 100%);
   }
+  .hero__bg-image {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+  }
   .hero__bg-overlay {
     position: absolute; inset: 0;
-    background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(201,168,76,0.015) 3px, rgba(201,168,76,0.015) 4px);
+    background: linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.45) 100%), 
+                repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(201,168,76,0.015) 3px, rgba(201,168,76,0.015) 4px);
+    z-index: 2;
   }
   .hero__grid-lines {
     position: absolute; inset: 0;
@@ -184,6 +192,7 @@ export const CSS = `
       linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
       linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
     background-size: 80px 80px;
+    z-index: 3;
   }
   .hero__content {
     position: relative; z-index: 10;
@@ -197,6 +206,7 @@ export const CSS = `
     font-size: clamp(9px,1.2vw,11px); letter-spacing: 0.22em;
     text-transform: uppercase; color: var(--gold);
     margin-bottom: 24px;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
   .hero__eyebrow-dot { width: 6px; height: 6px; background: var(--gold); display: inline-block; }
   .hero__title {
@@ -204,11 +214,12 @@ export const CSS = `
     font-size: clamp(80px, 18vw, 220px);
     font-weight: 900;
     line-height: 0.9;
-    color: var(--white);
+    color: #FFFFFF;
     text-transform: uppercase;
     letter-spacing: -0.02em;
     position: relative;
     display: block;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
   }
   .hero__title--glitch::before {
     content: attr(data-text);
@@ -235,9 +246,10 @@ export const CSS = `
     font-weight: 900;
     text-transform: uppercase;
     color: transparent;
-    -webkit-text-stroke: 1.5px rgba(201,168,76,0.6);
+    -webkit-text-stroke: 2px rgba(201,168,76,0.9);
     letter-spacing: -0.01em;
     line-height: 1;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6));
   }
   .hero__title-amp {
     font-family: 'Barlow Condensed', sans-serif;
@@ -247,10 +259,11 @@ export const CSS = `
   }
   .hero__sub {
     font-size: clamp(14px,1.8vw,18px);
-    color: rgba(244,243,239,0.55);
+    color: #F4F3EF;
     line-height: 1.7;
     max-width: 560px;
     margin-bottom: 40px;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
   .hero__br { display: none; }
   .hero__actions { display: flex; gap: 16px; flex-wrap: wrap; }
