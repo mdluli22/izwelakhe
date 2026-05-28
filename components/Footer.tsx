@@ -10,7 +10,8 @@ export default function Footer() {
           <span className="nav__logo-icon" style={{ fontSize: 20 }}>⬡</span>
           <span className="footer__name">IZWELAKHE</span>
         </div>
-        <span className="footer__tagline">Strategy · Construction · Property</span>
+        {/* <span className="footer__tagline">Strategy · Construction · Property</span> */}
+        <span className="footer__tagline">Strategy · Property</span>
         <span className="footer__copy">© {new Date().getFullYear()} Izwelakhe. All rights reserved.</span>
       </div>
     </footer>

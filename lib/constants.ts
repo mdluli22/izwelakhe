@@ -11,15 +11,15 @@ export type Stat = { num: string; label: string };
 export type WhyItem = { icon: string; title: string; body: string };
 
 export const SERVICES: Service[] = [
-  {
-    id: "consulting",
-    icon: "◈",
-    title: "Business Consulting",
-    tagline: "STRATEGY · GROWTH · RESULTS",
-    desc: "We help South African businesses and entrepreneurs define clear strategic direction, improve operations, and create sustainable growth plans tailored to local market realities.",
-    items: ["Strategic Planning", "Business Development", "Market Expansion", "Performance Frameworks", "Organisational Growth"],
+  // {
+  //   id: "consulting",
+  //   icon: "◈",
+  //   title: "Business Consulting",
+  //   tagline: "STRATEGY · GROWTH · RESULTS",
+  //   desc: "We help South African businesses and entrepreneurs define clear strategic direction, improve operations, and create sustainable growth plans tailored to local market realities.",
+  //   items: ["Strategic Planning", "Business Development", "Market Expansion", "Performance Frameworks", "Organisational Growth"],
     
-  },
+  // },
   {
     id: "construction",
     icon: "◉",

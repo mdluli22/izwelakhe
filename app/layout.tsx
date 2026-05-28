@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Izwelakhe — Strategy, Construction & Property",
+  title: "Izwelakhe | Strategy & Property",
   description: "Multi-disciplinary South African company providing business consulting, construction services, and property development solutions.",
   keywords: "business consulting South Africa, construction services, property development, student accommodation",
 };

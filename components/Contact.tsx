@@ -24,7 +24,7 @@ export default function Contact({ formData, formSent, onChange, onSubmit }: Prop
                 <span className="contact__info-icon">✉</span>
                 <div>
                   <p className="contact__info-label">Email</p>
-                  <p className="contact__info-val">info@izwelakhe.co.za</p>
+                  <p className="contact__info-val">info@izwelakheconsulting.co.za</p>
                 </div>
               </div>
               <div className="contact__info-item">
