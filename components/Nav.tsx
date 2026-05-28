@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { NAV } from "../lib/constants";
 
 type Props = {
@@ -15,8 +16,12 @@ export default function Nav({ menuOpen, setMenuOpen, scrollY }: Props) {
     <nav className={`nav ${navBg ? "nav--scrolled" : ""}`}>
       <div className="nav__inner">
         <a href="#" className="nav__logo">
-          <span className="nav__logo-icon">⬡</span>
-          IZWELAKHE
+          <Image 
+            src="/Izwelakhe_Logo.png" 
+            alt="Izwelakhe Logo" 
+            width={180}
+            height={80}
+          />
         </a>
         <div className="nav__links">
           {NAV.map((n) => (
