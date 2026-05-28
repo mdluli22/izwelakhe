@@ -39,7 +39,6 @@ export default function Services({ activeService, setActiveService }: Props) {
             <span className="services__panel-tag">{SERVICES[activeService].tagline}</span>
             <h3 className="services__panel-h3">{SERVICES[activeService].title}</h3>
             <p className="body-text">{SERVICES[activeService].desc}</p>
-            <div className="services__panel-badge">{SERVICES[activeService].stat}</div>
             <a href="#contact" className="btn btn--gold">Enquire About This Service</a>
           </div>
           <div className="services__panel-right">

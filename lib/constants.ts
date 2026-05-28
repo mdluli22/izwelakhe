@@ -5,7 +5,6 @@ export type Service = {
   tagline: string;
   desc: string;
   items: string[];
-  stat: string;
 };
 
 export type Stat = { num: string; label: string };
@@ -19,7 +18,7 @@ export const SERVICES: Service[] = [
     tagline: "STRATEGY · GROWTH · RESULTS",
     desc: "We help South African businesses and entrepreneurs define clear strategic direction, improve operations, and create sustainable growth plans tailored to local market realities.",
     items: ["Strategic Planning", "Business Development", "Market Expansion", "Performance Frameworks", "Organisational Growth"],
-    stat: "ROI-DRIVEN",
+    
   },
   {
     id: "construction",
@@ -27,8 +26,7 @@ export const SERVICES: Service[] = [
     title: "Construction & Maintenance",
     tagline: "BUILD · MAINTAIN · UPGRADE",
     desc: "From civil works to interior carpentry, we deliver reliable, cost-effective construction and property maintenance services across residential and commercial assets.",
-    items: ["Civil Maintenance & Repairs", "Property Renovations", "Interior Carpentry", "Paving & Drainage", "Boundary Wall Construction"],
-    stat: "QUALITY-BUILT",
+    items: ["Civil Maintenance & Repairs", "Property Renovations", "Renovations & Improvements", "Interior Carpentry Work"],
   },
   {
     id: "property",
@@ -37,16 +35,15 @@ export const SERVICES: Service[] = [
     tagline: "DEVELOP · MANAGE · OPTIMISE",
     desc: "We develop and manage accommodation solutions across the spectrum—student housing, short-term lets, and long-term residential rentals that generate lasting income.",
     items: ["Student Accommodation", "Short-Term Rentals", "Long-Term Residential", "Rental Optimisation", "Property Acquisition"],
-    stat: "INCOME-GENERATING",
   },
 ];
 
-export const STATS: Stat[] = [
-  { num: "3", label: "Core Divisions" },
-  { num: "360°", label: "End-to-End Service" },
-  { num: "SA", label: "Market Focused" },
-  { num: "∞", label: "Long-Term Value" },
-];
+// export const STATS: Stat[] = [
+//   { num: "3", label: "Core Divisions" },
+//   { num: "360°", label: "End-to-End Service" },
+//   { num: "SA", label: "Market Focused" },
+//   { num: "∞", label: "Long-Term Value" },
+// ];
 
 export const WHY: WhyItem[] = [
   { icon: "⬡", title: "Multi-Disciplinary", body: "Strategy, construction, and property under one roof — no coordination overhead." },

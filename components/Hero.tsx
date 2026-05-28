@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { STATS } from "../lib/constants";
+// import { STATS } from "../lib/constants";
 
 export default function Hero() {
   const [scrollY, setScrollY] = useState(0);
@@ -119,14 +119,14 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className={`hero__stats ${heroLoaded ? "hero__stats--visible" : ""}`}>
+      {/* <div className={`hero__stats ${heroLoaded ? "hero__stats--visible" : ""}`}>
         {STATS.map((s) => (
           <div key={s.num} className="hero__stat">
             <span className="hero__stat-num">{s.num}</span>
             <span className="hero__stat-label">{s.label}</span>
           </div>
         ))}
-      </div>
+      </div> */}
 
       <div className="hero__scroll-cue">
         <div className="hero__scroll-line" />
