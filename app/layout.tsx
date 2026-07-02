@@ -1,3 +1,5 @@
+import "./globals.css";
+
 export const metadata = {
   title: "Izwelakhe | Strategy & Property",
   description: "Multi-disciplinary South African company providing business consulting, construction services, and property development solutions.",
@@ -12,7 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body style={{ margin: 0, background: "#090909" }}>{children}</body>
+      <body>{children}</body>
     </html>
   );
 }

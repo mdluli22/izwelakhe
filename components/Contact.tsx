@@ -18,7 +18,7 @@ export default function Contact({ formData, formSent, onChange, onSubmit }: Prop
         <div className="contact__grid">
           <div className="contact__left">
             <p className="label">Contact Us</p>
-            <h2 className="h2">Let's Start<br /><span className="gold">a Conversation.</span></h2>
+            <h2 className="h2">Let&apos;s Start<br /><span className="gold">a Conversation.</span></h2>
             <div className="contact__info">
               <div className="contact__info-item">
                 <span className="contact__info-icon">✉</span>
@@ -48,7 +48,7 @@ export default function Contact({ formData, formSent, onChange, onSubmit }: Prop
               <div className="form-success">
                 <div className="form-success__icon">✓</div>
                 <h3 className="form-success__title">Message Received</h3>
-                <p className="form-success__body">We'll be in touch with you shortly.</p>
+                <p className="form-success__body">We&apos;ll be in touch with you shortly.</p>
               </div>
             ) : (
               <form className="form" onSubmit={onSubmit}>

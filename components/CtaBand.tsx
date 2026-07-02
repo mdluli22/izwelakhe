@@ -14,7 +14,7 @@ export default function CtaBand() {
           <span className="gold">something that lasts?</span>
         </h2>
         <p className="cta-band__sub">
-          Whether it's strategy, property, or construction — we're ready to bring your project to life.
+          Whether it&apos;s strategy, property, or construction — we&apos;re ready to bring your project to life.
         </p>
         <div className="cta-band__btns">
           <a href="#contact" className="btn btn--gold">GET IN TOUCH</a>
