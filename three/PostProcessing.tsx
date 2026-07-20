@@ -19,14 +19,14 @@ export default function PostProcessing() {
     const renderPass = new RenderPass(scene, camera);
     const bloomPass = new UnrealBloomPass(
       new THREE.Vector2(size.width, size.height),
-      0.42,
-      0.78,
-      0.2
+      0.22,
+      0.56,
+      0.38
     );
     const bokehPass = new BokehPass(scene, camera, {
-      focus: 18,
-      aperture: 0.00018,
-      maxblur: 0.006,
+      focus: 24,
+      aperture: 0.00008,
+      maxblur: 0.0024,
       aspect: size.width / size.height,
     });
     const vignettePass = new ShaderPass(VignetteShader);

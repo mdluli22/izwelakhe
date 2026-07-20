@@ -1,53 +1,90 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { Environment } from "@react-three/drei";
 import * as THREE from "three";
+// import MountainRange from "./MountainRange";
+import HeroMountain from "@/components/HeroMountain";
 
-import Terrain from "./Terrian";
-import TerrainBack from "./TerrianBack";
-import Particles from "./Particles";
-import EngineeringGrid from "./Grid";
-import Lights from "./Lights";
-import CameraRig from "./CameraRig";
-import PostProcessing from "./PostProcessing";
+import {
+  EffectComposer,
+  Bloom,
+  DepthOfField,
+  Noise,
+  Vignette,
+} from "@react-three/postprocessing";
 
 export default function HeroScene() {
   return (
     <Canvas
-      className="absolute inset-0 !h-full !w-full"
       shadows
-      dpr={[1, 1.5]}
+      dpr={[1, 1.75]}
+      camera={{
+        position: [0, 3.8, 30],
+        fov: 31,
+        near: 0.1,
+        far: 120,
+      }}
       gl={{
         antialias: true,
+        alpha: true,
         powerPreference: "high-performance",
-        alpha: false,
-        toneMapping: THREE.ACESFilmicToneMapping,
-        toneMappingExposure: 1.08,
-        outputColorSpace: THREE.SRGBColorSpace,
       }}
-      camera={{
-        position: [-14, 9, 25],
-        fov: 34,
-        near: 0.1,
-        far: 95,
+      onCreated={({ gl }) => {
+        gl.outputColorSpace = THREE.SRGBColorSpace;
+        gl.toneMapping = THREE.ACESFilmicToneMapping;
+        gl.toneMappingExposure = 0.82;
       }}
     >
-      <color attach="background" args={["#050505"]} />
-      <fog attach="fog" args={["#050505", 10, 72]} />
+      <color attach="background" args={["#030505"]} />
+      <fog attach="fog" args={["#050706", 18, 78]} />
 
-      <Lights />
-      <CameraRig />
+      <ambientLight intensity={0.12} />
 
-      <Particles />
+      <hemisphereLight args={["#f5ead2", "#050809", 0.28]} />
 
-      <TerrainBack />
-      <Terrain />
+      <directionalLight
+        position={[-10, 18, 16]}
+        intensity={3.8}
+        color="#fff1d0"
+        castShadow
+        shadow-mapSize-width={4096}
+        shadow-mapSize-height={4096}
+        shadow-camera-near={1}
+        shadow-camera-far={70}
+        shadow-camera-left={-45}
+        shadow-camera-right={45}
+        shadow-camera-top={35}
+        shadow-camera-bottom={-35}
+      />
 
-      <EngineeringGrid />
+      <spotLight
+        position={[18, 12, 18]}
+        angle={0.32}
+        penumbra={1}
+        intensity={3.2}
+        color="#d8bd72"
+      />
 
-      <Environment preset="night" />
-      <PostProcessing />
+      {/* <MountainRange variant="back" />
+      <MountainRange variant="middle" />
+      <MountainRange variant="front" /> */}
+      <HeroMountain />v
+
+      <EffectComposer multisampling={0}>
+        <DepthOfField
+          focusDistance={0.035}
+          focalLength={0.042}
+          bokehScale={0.7}
+        />
+        <Bloom
+          intensity={0.16}
+          luminanceThreshold={0.72} 
+          luminanceSmoothing={0.42}
+          mipmapBlur
+        />
+        <Noise opacity={0.025} />
+        <Vignette offset={0.18} darkness={0.78} />
+      </EffectComposer>
     </Canvas>
   );
 }

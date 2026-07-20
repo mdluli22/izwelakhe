@@ -9,7 +9,7 @@ export default function CameraRig() {
   const mouse = useRef({ x: 0, y: 0 });
   const scroll = useRef({ progress: 0 });
   const viewport = useRef({ isSmall: false });
-  const cinematic = useMemo(() => ({ x: -10, y: 6.5, z: 21 }), []);
+  const cinematic = useMemo(() => ({ x: -10.5, y: 7.6, z: 26 }), []);
 
   useEffect(() => {
     const syncViewport = () => {
@@ -18,8 +18,8 @@ export default function CameraRig() {
 
     const intro = gsap.fromTo(
       cinematic,
-      { x: -16, y: 10, z: 27 },
-      { x: -10, y: 6.5, z: 21, duration: 2.8, ease: "power3.out" }
+      { x: -16, y: 10.5, z: 34 },
+      { x: -10.5, y: 7.6, z: 26, duration: 2.8, ease: "power3.out" }
     );
 
     const onPointerMove = (event: PointerEvent) => {
@@ -51,18 +51,18 @@ export default function CameraRig() {
     const { camera } = state;
     const scrollProgress = scroll.current.progress;
     const small = viewport.current.isSmall;
-    const targetX = (small ? -5.4 : cinematic.x) + mouse.current.x * (small ? 0.45 : 1.1) + Math.sin(t * 0.08) * (small ? 0.22 : 0.55);
-    const targetY = (small ? 6.9 : cinematic.y) - scrollProgress * (small ? 1.4 : 2.4) - mouse.current.y * (small ? 0.28 : 0.65) + Math.sin(t * 0.12) * (small ? 0.16 : 0.28);
-    const targetZ = (small ? 29 : cinematic.z) - scrollProgress * (small ? 2.2 : 5.5);
+    const targetX = (small ? -6.4 : cinematic.x) + mouse.current.x * (small ? 0.55 : 1.45) + Math.sin(t * 0.08) * (small ? 0.2 : 0.46);
+    const targetY = (small ? 8.4 : cinematic.y) - scrollProgress * (small ? 1.2 : 2.1) - mouse.current.y * (small ? 0.36 : 0.82) + Math.sin(t * 0.12) * (small ? 0.14 : 0.24);
+    const targetZ = (small ? 31 : cinematic.z) - scrollProgress * (small ? 1.8 : 4.6) + mouse.current.x * (small ? 0.18 : 0.5);
 
     camera.position.x = THREE.MathUtils.lerp(camera.position.x, targetX, 0.035);
     camera.position.y = THREE.MathUtils.lerp(camera.position.y, targetY, 0.035);
     camera.position.z = THREE.MathUtils.lerp(camera.position.z, targetZ, 0.035);
 
     camera.lookAt(
-      (small ? 5.4 : 2) + mouse.current.x * (small ? 0.35 : 0.9),
-      (small ? -2.2 : -1.6) - scrollProgress * (small ? 0.7 : 1.4),
-      -7
+      (small ? 6.3 : 5) + mouse.current.x * (small ? 0.5 : 1.25),
+      (small ? -2.9 : -2.3) - scrollProgress * (small ? 0.58 : 1.15),
+      -22
     );
   });
 

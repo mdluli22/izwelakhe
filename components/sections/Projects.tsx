@@ -1,6 +1,7 @@
 "use client";
 
 import { PROJECTS, STATS } from "@/lib/constants";
+import Image from "next/image";
 
 export default function Projects() {
   return (
@@ -15,6 +16,14 @@ export default function Projects() {
           {PROJECTS.map((project, index) => (
             <article className="project-row reveal-up" key={project.title}>
               <div className="project-media" aria-hidden="true">
+                <Image
+                  src={project.image}
+                  alt=""
+                  fill
+                  sizes="(max-width: 900px) 100vw, 52vw"
+                  className="project-media__image"
+                />
+                <span className="project-media__index">0{index + 1}</span>
                 <span>{project.sector}</span>
               </div>
               <div className="project-body">
