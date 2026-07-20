@@ -12,6 +12,7 @@ import Process from "@/components/sections/Process";
 import Projects from "@/components/sections/Projects";
 import CTA from "@/components/sections/CTA";
 import Contact from "@/components/sections/Contact";
+import ScrollToTop from "@/components/ScrollToTop";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -207,6 +208,7 @@ export default function Page() {
           </nav>
         </div>
       </footer>
+      <ScrollToTop />
     </main>
   );
 }

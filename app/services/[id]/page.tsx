@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SERVICES } from "@/lib/constants";
+import ScrollToTop from "@/components/ScrollToTop";
 import ServiceScene from "@/components/ServiceScene";
 
 type ServicePageProps = {
@@ -170,6 +171,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </div>
         </div>
       </section>
+      <ScrollToTop />
     </main>
   );
 }

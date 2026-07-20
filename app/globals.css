@@ -1748,6 +1748,50 @@ canvas {
   text-transform: uppercase;
 }
 
+.scroll-top {
+  position: fixed;
+  right: clamp(1rem, 3vw, 2rem);
+  bottom: clamp(1rem, 3vw, 2rem);
+  z-index: 70;
+  display: inline-flex;
+  width: 3rem;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(207, 167, 90, 0.48);
+  border-radius: 999px;
+  background: rgba(7, 8, 10, 0.72);
+  color: #f5f5f5;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(0, 0.85rem, 0) scale(0.94);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.28);
+  transition: opacity 220ms ease, transform 220ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.scroll-top span {
+  color: #cfa75a;
+  font-size: 1.15rem;
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+.scroll-top--visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.scroll-top:hover,
+.scroll-top:focus-visible {
+  border-color: rgba(207, 167, 90, 0.86);
+  background: rgba(207, 167, 90, 0.13);
+  outline: none;
+  transform: translate3d(0, -2px, 0) scale(1);
+}
+
 .service-page {
   min-height: 100vh;
   background: #0b0d10;
