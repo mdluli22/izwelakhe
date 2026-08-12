@@ -66,8 +66,7 @@ export default function Page() {
     heroTimeline
       .to(".hero-title", { scale: 0.86, y: -72, transformOrigin: "left center", ease: "none" }, 0)
       .to(".hero-copy, .hero-kicker", { y: -48, autoAlpha: 0.35, ease: "none" }, 0)
-      .to(".hero-transition", { opacity: 1, scaleY: 1.08, transformOrigin: "bottom center", ease: "none" }, 0)
-      .to(".hero-premium canvas", { scale: 1.08, y: -28, ease: "none" }, 0)
+      .to(".hero-media__image", { scale: 1.08, y: -28, ease: "none" }, 0)
       .fromTo(".mission-section", { y: 72 }, { y: 0, ease: "none" }, 0);
 
     const media = gsap.matchMedia();

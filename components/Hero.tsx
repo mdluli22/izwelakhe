@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { createAnimatable } from "animejs";
-import HeroScene from "@/three/HeroScene";
 import { NAV } from "@/lib/constants";
 
 type CursorAnimatable = {
@@ -16,7 +15,6 @@ type CursorAnimatable = {
 };
 
 export default function Hero() {
-  const eyebrow = useRef<HTMLParagraphElement>(null);
   const title = useRef<HTMLHeadingElement>(null);
   const copy = useRef<HTMLDivElement>(null);
   const cursor = useRef<HTMLDivElement>(null);
@@ -25,8 +23,7 @@ export default function Hero() {
     const timeline = gsap.timeline({ defaults: { ease: "power3.out" } });
 
     timeline
-      .fromTo(eyebrow.current, { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.9 })
-      .fromTo(title.current, { autoAlpha: 0, y: 34 }, { autoAlpha: 1, y: 0, duration: 1.2 }, "-=0.35")
+      .fromTo(title.current, { autoAlpha: 0, y: 34 }, { autoAlpha: 1, y: 0, duration: 1.2 })
       .fromTo(copy.current, { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.9 }, "-=0.55");
 
     const cursorElement = cursor.current;
@@ -113,17 +110,20 @@ export default function Hero() {
         </a>
       </header>
 
-      <HeroScene />
-
-      {/* Overlay */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/76 via-black/26 to-black/4" />
-      <div className="hero-haze absolute inset-0 z-10" />
-      <div className="hero-lens absolute inset-0 z-10" />
-      <div className="hero-noise absolute inset-0 z-30" />
-      <div className="hero-vignette absolute inset-0 z-30" />
+      <div className="hero-media" aria-hidden="true">
+        <Image
+          className="hero-media__image"
+          src="/izwelakhe-hero-development-v2.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          quality={90}
+        />
+      </div>
 
       {/* Text */}
-      <div className="hero-content absolute inset-0 z-20 flex items-center">
+      <div className="hero-content">
         <div className="hero-content__inner">
           {/* <p ref={eyebrow} className="hero-kicker">
             Izwelakhe
@@ -163,8 +163,6 @@ export default function Hero() {
         <span>Izwelakhe</span>
         <span>Future-ready assets</span>
       </div>
-
-      <div className="hero-transition" aria-hidden="true" />
 
       {/* <div className="hero-corner" aria-hidden="true">
         <span>

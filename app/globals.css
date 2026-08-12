@@ -85,6 +85,21 @@ canvas {
   height: 100% !important;
 }
 
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: #030403;
+}
+
+.hero-media__image {
+  object-fit: cover;
+  object-position: center center;
+  transform-origin: center center;
+  will-change: transform;
+}
+
 .hero::before {
   content: "";
   position: absolute;
@@ -131,10 +146,17 @@ canvas {
 }
 
 .hero-nav,
-.hero-content,
 .hero-footer {
   position: relative;
   z-index: 3;
+}
+
+.hero-content {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: flex-end;
 }
 
 .hero-nav {
@@ -206,7 +228,7 @@ canvas {
 }
 
 .hero-content {
-  padding: clamp(6rem, 12vh, 9rem) clamp(1.25rem, 5vw, 4.5rem) clamp(4.5rem, 8vh, 6rem);
+  padding: clamp(6rem, 12vh, 9rem) clamp(1.25rem, 5vw, 4.5rem) clamp(3.75rem, 7vh, 5rem);
 }
 
 .hero-content__inner {
@@ -230,7 +252,7 @@ canvas {
   margin: 0;
   max-width: 10ch;
   color: #f7f2e8;
-  font-size: clamp(2.9rem, 4.6vw, 4.8rem);
+  font-size: clamp(2.6rem, 3.8vw, 4rem);
   font-weight: 300;
   letter-spacing: 0;
   line-height: 0.94;
@@ -249,7 +271,7 @@ canvas {
 .hero-copy p {
   margin: 0;
   color: rgba(246, 241, 230, 0.76);
-  font-size: clamp(0.98rem, 1.16vw, 1.16rem);
+  font-size: clamp(0.9rem, 0.95vw, 1.02rem);
   font-weight: 400;
   line-height: 1.68;
 }
@@ -454,6 +476,10 @@ canvas {
     min-height: 100svh;
   }
 
+  .hero-media__image {
+    object-position: 61% center;
+  }
+
   .hero-cursor {
     display: none;
   }
@@ -479,7 +505,7 @@ canvas {
 
   .hero-content {
     align-items: end;
-    padding: 6rem 1.25rem 4.75rem;
+    padding: 6rem 1.25rem max(2rem, env(safe-area-inset-bottom));
   }
 
   .hero-content__inner {
@@ -496,7 +522,7 @@ canvas {
 
   .hero-title {
     max-width: 9.4ch;
-    font-size: clamp(2.3rem, 10.8vw, 3.05rem);
+    font-size: clamp(2rem, 9.2vw, 2.6rem);
     line-height: 0.94;
   }
 
@@ -510,7 +536,7 @@ canvas {
   }
 
   .hero-copy p {
-    font-size: 0.92rem;
+    font-size: 0.86rem;
     line-height: 1.58;
   }
 
@@ -583,7 +609,7 @@ canvas {
 
   .hero-title {
     max-width: 8ch;
-    font-size: clamp(3.4rem, 6.2vw, 4.6rem);
+    font-size: clamp(2.8rem, 5vw, 3.8rem);
     line-height: 0.94;
   }
 
@@ -3444,5 +3470,219 @@ canvas {
 
   .contact-page__footer a {
     justify-self: start;
+  }
+}
+
+/* Softer, more restrained typography beyond the landing hero. */
+.cinematic-section,
+.service-page,
+.contact-page {
+  font-weight: 300;
+}
+
+.section-heading h2,
+.mission-statement h2,
+.cta-shell h2,
+.contact-intro h2 {
+  font-size: clamp(2.4rem, 5.8vw, 5.4rem);
+  font-weight: 300;
+  line-height: 1.02;
+}
+
+.mission-copy p,
+.capability-content p,
+.industry-card p,
+.process-step p,
+.project-body p,
+.contact-intro p {
+  font-size: clamp(0.9rem, 1vw, 1.02rem);
+  font-weight: 300;
+  line-height: 1.72;
+}
+
+.capability-content h3,
+.industry-card h3,
+.process-step h3,
+.project-body h3 {
+  font-size: clamp(1.8rem, 3.8vw, 4.1rem);
+  font-weight: 300;
+  line-height: 1.05;
+}
+
+.capability-number {
+  font-size: clamp(4rem, 9vw, 7.5rem);
+}
+
+.capability-rail__item strong {
+  font-size: clamp(1.05rem, 1.55vw, 1.55rem);
+  font-weight: 300;
+}
+
+.process-step span {
+  font-size: clamp(2.8rem, 7vw, 5.8rem);
+}
+
+.project-media__index {
+  font-size: clamp(2.4rem, 6vw, 4.8rem) !important;
+}
+
+.stat-block strong {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+}
+
+.site-footer strong {
+  font-size: clamp(2rem, 4.5vw, 3.8rem);
+}
+
+.section-kicker,
+.capability-rail__item span,
+.capability-link,
+.industry-card__meta em,
+.cinematic-button,
+.service-nav__brand,
+.service-back,
+.service-snapshot span,
+.service-snapshot strong,
+.service-workbench__header p,
+.service-diagnostic span,
+.contact-page__nav nav a,
+.contact-page__footer a,
+.contact-page__steps article > span,
+.contact-page__direct span,
+.contact-page-form label > span,
+.contact-page__service-grid span {
+  font-weight: 600;
+}
+
+.service-hero h1 {
+  font-size: clamp(3.6rem, 8vw, 7.5rem);
+  font-weight: 300;
+  line-height: 0.96;
+}
+
+.service-hero__copy p,
+.service-detail__aside p,
+.service-area p,
+.faq-item p,
+.service-next__card small {
+  font-size: clamp(0.9rem, 1vw, 1.02rem);
+  font-weight: 300;
+}
+
+.service-professional-detail__intro h2 {
+  font-size: clamp(2.3rem, 4.6vw, 4.5rem);
+}
+
+.service-professional-detail__intro p:last-child,
+.service-diagnostic p {
+  font-size: clamp(0.9rem, 1vw, 1rem);
+  font-weight: 300;
+}
+
+.service-workbench__header span {
+  font-size: clamp(3rem, 7vw, 6.5rem);
+}
+
+.service-diagnostic h3 {
+  font-size: clamp(1.25rem, 1.9vw, 1.9rem);
+}
+
+.service-detail__aside span {
+  font-size: clamp(6rem, 15vw, 11rem);
+}
+
+.service-area h2 {
+  font-size: clamp(1.4rem, 2.3vw, 2.25rem);
+}
+
+.service-faq h2 {
+  font-size: clamp(2.4rem, 5.8vw, 5rem);
+}
+
+.faq-item summary {
+  font-size: clamp(1rem, 1.45vw, 1.22rem);
+  font-weight: 300;
+}
+
+.service-next__card span {
+  font-size: 2.4rem;
+}
+
+.service-next__card strong {
+  font-size: clamp(1.4rem, 2.4vw, 2.3rem);
+}
+
+.contact-page__hero h1 {
+  font-size: clamp(3.4rem, 7vw, 6.8rem);
+  font-weight: 300;
+  line-height: 0.96;
+}
+
+.contact-page__hero-copy p {
+  font-size: clamp(0.9rem, 1vw, 1.02rem);
+  font-weight: 300;
+}
+
+.contact-page__steps h2 {
+  font-size: clamp(1.1rem, 1.55vw, 1.4rem);
+  font-weight: 300;
+}
+
+.contact-page__steps p,
+.contact-page__direct p,
+.contact-page__service-grid p {
+  font-size: 0.84rem;
+  font-weight: 300;
+}
+
+.contact-page__direct a {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.contact-page-form__heading h2 {
+  font-size: clamp(2rem, 3.8vw, 3.8rem);
+}
+
+.contact-page__services-heading h2 {
+  font-size: clamp(2.3rem, 4.5vw, 4.3rem);
+}
+
+.contact-page__service-grid h3 {
+  font-size: clamp(1.7rem, 2.8vw, 2.8rem);
+}
+
+.contact-page__footer strong {
+  font-size: clamp(1.8rem, 3.8vw, 3rem);
+}
+
+@media (max-width: 640px) {
+  .section-heading h2,
+  .mission-statement h2,
+  .cta-shell h2,
+  .contact-intro h2 {
+    font-size: clamp(2.15rem, 10.5vw, 3.1rem);
+  }
+
+  .capability-content h3,
+  .industry-card h3,
+  .process-step h3,
+  .project-body h3 {
+    font-size: clamp(1.7rem, 8vw, 2.5rem);
+  }
+
+  .service-hero h1,
+  .contact-page__hero h1 {
+    font-size: clamp(2.8rem, 13vw, 4rem);
+  }
+
+  .service-professional-detail__intro h2,
+  .service-faq h2,
+  .contact-page__services-heading h2 {
+    font-size: clamp(2.1rem, 10vw, 3rem);
+  }
+
+  .contact-page-form__heading h2 {
+    font-size: 2.2rem;
   }
 }
