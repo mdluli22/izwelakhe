@@ -72,8 +72,14 @@ export default async function ServicePage({ params }: ServicePageProps) {
   return (
     <main className={`service-page ${serviceConfig.pageClass}`}>
       <header className="service-nav">
-        <Link href="/" className="service-nav__brand">
-          Izwelakhe
+        <Link href="/" className="service-nav__brand" aria-label="Izwelakhe home">
+          <Image
+            src="/Izwelakhe_Logo.png"
+            alt=""
+            width={180}
+            height={80}
+            priority
+          />
         </Link>
         <nav aria-label="Service navigation">
           <Link href="/#capabilities">Services</Link>
