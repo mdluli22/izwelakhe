@@ -1,10 +1,11 @@
+import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
 
-const RESEND_ENDPOINT = "https://api.resend.com/emails";
 const CONTACT_RECIPIENT = "sifiso@izwelakheconsulting.co.za";
-const DEFAULT_SENDER = "Izwelakhe Website <website@izwelakheconsulting.co.za>";
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX = 5;
+
+export const runtime = "nodejs";
 
 const recentRequests = new Map<string, number[]>();
 
@@ -170,6 +171,41 @@ function buildEmail(payload: ContactPayload) {
   return { html, text };
 }
 
+function parseBoolean(value: string | undefined, fallback: boolean) {
+  if (!value) return fallback;
+  if (value.toLowerCase() === "true") return true;
+  if (value.toLowerCase() === "false") return false;
+  return null;
+}
+
+function getSmtpConfig() {
+  const host = process.env.SMTP_HOST?.trim() ?? "";
+  const portValue = process.env.SMTP_PORT?.trim() || "587";
+  const user = process.env.SMTP_USER?.trim() ?? "";
+  const password = process.env.SMTP_PASSWORD ?? "";
+  const from = process.env.SMTP_FROM?.trim() ?? "";
+
+  if (!/^\d{1,5}$/.test(portValue)) return null;
+
+  const port = Number(portValue);
+  const secure = parseBoolean(process.env.SMTP_SECURE?.trim(), port === 465);
+  const requireTLS = parseBoolean(process.env.SMTP_REQUIRE_TLS?.trim(), port !== 465);
+
+  if (
+    !host ||
+    port < 1 ||
+    port > 65535 ||
+    secure === null ||
+    requireTLS === null ||
+    !from ||
+    Boolean(user) !== Boolean(password)
+  ) {
+    return null;
+  }
+
+  return { host, port, secure, requireTLS, user, password, from };
+}
+
 export async function POST(request: Request) {
   let rawPayload: unknown;
 
@@ -201,11 +237,10 @@ export async function POST(request: Request) {
     );
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.CONTACT_FROM_EMAIL?.trim() || DEFAULT_SENDER;
+  const smtp = getSmtpConfig();
 
-  if (!apiKey) {
-    console.error("Contact form email service is missing RESEND_API_KEY.");
+  if (!smtp) {
+    console.error("Contact form SMTP configuration is missing or invalid.");
     return NextResponse.json(
       { error: "The email service is temporarily unavailable. Please try again later." },
       { status: 503 }
@@ -215,36 +250,39 @@ export async function POST(request: Request) {
   const { html, text } = buildEmail(payload);
 
   try {
-    const response = await fetch(RESEND_ENDPOINT, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-        "Idempotency-Key": `contact-${payload.submissionId}`,
-      },
-      body: JSON.stringify({
-        from,
-        to: [CONTACT_RECIPIENT],
-        reply_to: payload.email,
-        subject: `Website enquiry: ${payload.service} — ${payload.name}`,
-        html,
-        text,
-        tags: [{ name: "source", value: "website_contact" }],
-      }),
-      cache: "no-store",
+    const transporter = nodemailer.createTransport({
+      host: smtp.host,
+      port: smtp.port,
+      secure: smtp.secure,
+      requireTLS: smtp.requireTLS,
+      connectionTimeout: 10_000,
+      greetingTimeout: 10_000,
+      socketTimeout: 20_000,
+      ...(smtp.user
+        ? {
+            auth: {
+              user: smtp.user,
+              pass: smtp.password,
+            },
+          }
+        : {}),
     });
 
-    if (!response.ok) {
-      console.error(`Contact form email provider returned status ${response.status}.`);
-      return NextResponse.json(
-        { error: "We could not send your enquiry right now. Please try again shortly." },
-        { status: 502 }
-      );
-    }
+    await transporter.sendMail({
+      from: smtp.from,
+      to: CONTACT_RECIPIENT,
+      replyTo: payload.email,
+      subject: `Website enquiry: ${payload.service} — ${payload.name}`,
+      html,
+      text,
+      headers: {
+        "X-Contact-Submission-ID": payload.submissionId,
+      },
+    });
 
     return NextResponse.json({ ok: true });
-  } catch {
-    console.error("Contact form could not reach the email provider.");
+  } catch (error) {
+    console.error("Contact form SMTP delivery failed.", error);
     return NextResponse.json(
       { error: "We could not send your enquiry right now. Please try again shortly." },
       { status: 502 }

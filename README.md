@@ -37,13 +37,13 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Contact form email delivery
 
-The `/contact` form sends enquiries to `sifiso@izwelakheconsulting.co.za` through Resend.
+The `/contact` form sends enquiries to `sifiso@izwelakheconsulting.co.za` through the configured SMTP server.
 
-1. Verify `izwelakheconsulting.co.za` in Resend.
-2. Copy `.env.example` to `.env.local`.
-3. Add a Resend API key and a sender address on the verified domain.
+1. Copy `.env.example` to `.env.local`.
+2. Add the SMTP host, port, credentials, and sender address supplied by your email host.
+3. Use port `465` with `SMTP_SECURE=true`, or port `587` with `SMTP_SECURE=false` and `SMTP_REQUIRE_TLS=true`.
 
-The API key is read only by the server-side `/api/contact` route and must never be exposed as a public environment variable.
+SMTP credentials are read only by the server-side `/api/contact` route and must never be exposed as public environment variables.
 
 ## CI/CD and VPS deployment
 
@@ -60,8 +60,13 @@ Create a `.env` file inside `APP_DIR` on the VPS with:
 
 ```dotenv
 APP_PORT=3001
-RESEND_API_KEY=re_replace_with_your_key
-CONTACT_FROM_EMAIL=Izwelakhe Website <website@izwelakheconsulting.co.za>
+SMTP_HOST=smtp.example.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_REQUIRE_TLS=true
+SMTP_USER=website@izwelakheconsulting.co.za
+SMTP_PASSWORD=replace_with_your_smtp_password
+SMTP_FROM=Izwelakhe Website <website@izwelakheconsulting.co.za>
 ```
 
 The Compose service binds to `127.0.0.1:${APP_PORT}` so it can sit behind the VPS reverse proxy without exposing the Next.js server directly. Change `APP_PORT` if port `3001` is already occupied.
