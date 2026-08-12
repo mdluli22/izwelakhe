@@ -4,15 +4,13 @@ on:
   push:
     branches:
       - clean-main
-
   pull_request:
     branches:
       - clean-main
-
   workflow_dispatch:
 
 concurrency:
-  group: izwelakhe-${{ github.event.pull_request.number || github.ref }}
+  group: clean-main-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -26,7 +24,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -49,6 +47,7 @@ jobs:
     needs: validate
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    environment: production
 
     steps:
       - name: Deploy over SSH
@@ -56,29 +55,18 @@ jobs:
         env:
           APP_DIR: ${{ secrets.APP_DIR }}
           DEPLOY_BRANCH: clean-main
-
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           envs: APP_DIR,DEPLOY_BRANCH
           command_timeout: 15m
-
           script: |
             set -e
-
-            echo "Deploying Izwelakhe..."
-
             cd "$APP_DIR"
-
             git fetch origin "$DEPLOY_BRANCH"
             git checkout "$DEPLOY_BRANCH"
             git pull --ff-only origin "$DEPLOY_BRANCH"
-
-            docker compose -p izwelakhe config --quiet
-
-            docker compose -p izwelakhe up -d --build --remove-orphans
-
+            docker compose config --quiet
+            docker compose up -d --build --remove-orphans
             docker image prune -f
-
-            echo "Izwelakhe deployment complete."
