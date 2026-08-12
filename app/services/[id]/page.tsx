@@ -1,8 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { SERVICES } from "@/lib/constants";
 import ScrollToTop from "@/components/ScrollToTop";
-import ServiceScene from "@/components/ServiceScene";
 
 type ServicePageProps = {
   params: Promise<{ id: string }>;
@@ -16,6 +16,7 @@ const SERVICE_PAGE_CONFIG = {
     architecture: "Engagement Architecture",
     outcomes: "Executive outcomes",
     snapshot: ["Diagnose", "Prioritise", "Execute"],
+    heroImage: "/service-consulting-hero.png",
   },
   construction: {
     pageClass: "service-page--construction",
@@ -24,6 +25,7 @@ const SERVICE_PAGE_CONFIG = {
     architecture: "Delivery Architecture",
     outcomes: "Delivery outcomes",
     snapshot: ["Scope", "Build", "Support"],
+    heroImage: "/service-construction-hero.png",
   },
   property: {
     pageClass: "service-page--property",
@@ -32,6 +34,7 @@ const SERVICE_PAGE_CONFIG = {
     architecture: "Asset Architecture",
     outcomes: "Asset outcomes",
     snapshot: ["Acquire", "Prepare", "Operate"],
+    heroImage: "/service-property-hero.png",
   },
 } as const;
 
@@ -78,46 +81,47 @@ export default async function ServicePage({ params }: ServicePageProps) {
         </nav>
       </header>
 
-      <section className="service-hero cinematic-section">
-        <div className="service-hero__scene" aria-hidden="true">
-          <ServiceScene variant={service.id as keyof typeof SERVICE_PAGE_CONFIG} />
-        </div>
+      <section className="service-hero service-hero--clean">
+        <Image
+          className="service-hero__image"
+          src={serviceConfig.heroImage}
+          alt=""
+          fill
+          priority
+          quality={90}
+          sizes="100vw"
+        />
+        <div className="service-hero__shade" aria-hidden="true" />
         <div className="section-shell service-hero__grid">
-          <div>
-            <Link href="/#capabilities" className="service-back">
-              Back to services
-            </Link>
+          <div className="service-hero__title">
+            <Link href="/#capabilities" className="service-back">Back to services</Link>
             <p className="section-kicker">{service.tagline}</p>
             <h1>{service.title}</h1>
           </div>
           <div className="service-hero__copy">
             <p>{service.overview}</p>
-            <div className="service-snapshot" aria-label={`${service.title} engagement snapshot`}>
+            <ol className="service-snapshot" aria-label={`${service.title} engagement snapshot`}>
               {serviceConfig.snapshot.map((item, index) => (
-                <span key={item}>
+                <li key={item}>
                   <strong>0{index + 1}</strong>
                   {item}
-                </span>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
         </div>
       </section>
 
-      <section className="service-detail cinematic-section">
-        <div className="section-shell service-professional-detail">
-          <aside className="service-professional-detail__intro">
+      <section className="service-detail service-detail--clean">
+        <div className="section-shell">
+          <header className="service-detail__heading">
             <p className="section-kicker">{serviceConfig.focus}</p>
             <h2>{serviceConfig.headline}</h2>
             <p>{service.detailIntro}</p>
-          </aside>
+          </header>
 
-          <div className="service-workbench">
-            <div className="service-workbench__header">
-              <span aria-hidden="true">{service.icon}</span>
-              <p>{serviceConfig.architecture}</p>
-            </div>
-
+          <div className="service-areas-clean" aria-label={serviceConfig.architecture}>
+            <p className="section-kicker">{serviceConfig.architecture}</p>
             <div className="service-diagnostics">
               {service.serviceAreas.map((area, index) => (
                 <article key={area.title} className="service-diagnostic">
@@ -127,20 +131,20 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 </article>
               ))}
             </div>
+          </div>
 
-            <div className="service-professional-outcomes">
-              <p className="section-kicker">{serviceConfig.outcomes}</p>
-              <ul>
-                {service.outcomes.map((outcome) => (
-                  <li key={outcome}>{outcome}</li>
-                ))}
-              </ul>
-            </div>
+          <div className="service-professional-outcomes">
+            <p className="section-kicker">{serviceConfig.outcomes}</p>
+            <ul>
+              {service.outcomes.map((outcome) => (
+                <li key={outcome}>{outcome}</li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
 
-      <section className="service-faq cinematic-section">
+      <section className="service-faq service-faq--clean">
         <div className="section-shell service-faq__grid">
           <div>
             <p className="section-kicker">FAQ</p>
@@ -157,15 +161,15 @@ export default async function ServicePage({ params }: ServicePageProps) {
         </div>
       </section>
 
-      <section className="service-next cinematic-section">
+      <section className="service-next service-next--clean">
         <div className="section-shell">
           <p className="section-kicker">Explore more</p>
           <div className="service-next__grid">
             {relatedServices.map((item) => (
               <Link href={`/services/${item.id}`} key={item.id} className="service-next__card">
-                <span>{item.icon}</span>
                 <strong>{item.title}</strong>
                 <small>{item.desc}</small>
+                <span>View service →</span>
               </Link>
             ))}
           </div>
