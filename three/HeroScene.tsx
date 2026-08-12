@@ -68,7 +68,7 @@ export default function HeroScene() {
       {/* <MountainRange variant="back" />
       <MountainRange variant="middle" />
       <MountainRange variant="front" /> */}
-      <HeroMountain />v
+      <HeroMountain />
 
       <EffectComposer multisampling={0}>
         <DepthOfField

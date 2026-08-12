@@ -74,7 +74,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         </Link>
         <nav aria-label="Service navigation">
           <Link href="/#capabilities">Services</Link>
-          <Link href="/#contact">Contact</Link>
+          <Link href="/contact">Contact</Link>
         </nav>
       </header>
 

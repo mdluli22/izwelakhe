@@ -1,0 +1,85 @@
+name: Deploy Izwelakhe
+
+on:
+  push:
+    branches:
+      - clean-main
+
+  pull_request:
+    branches:
+      - clean-main
+
+  workflow_dispatch:
+
+concurrency:
+  group: izwelakhe-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Lint and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run lint checks
+        run: npm run lint
+
+      - name: Build application
+        run: npm run build
+
+  deploy:
+    name: Deploy to private VPS
+    if: github.event_name == 'push' && github.ref == 'refs/heads/clean-main'
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: production
+
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.2.5
+        env:
+          APP_DIR: ${{ secrets.APP_DIR }}
+          DEPLOY_BRANCH: clean-main
+
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: APP_DIR,DEPLOY_BRANCH
+          command_timeout: 15m
+
+          script: |
+            set -e
+
+            echo "Deploying Izwelakhe..."
+
+            cd "$APP_DIR"
+
+            git fetch origin "$DEPLOY_BRANCH"
+            git checkout "$DEPLOY_BRANCH"
+            git pull --ff-only origin "$DEPLOY_BRANCH"
+
+            docker compose -p izwelakhe config --quiet
+
+            docker compose -p izwelakhe up -d --build --remove-orphans
+
+            docker image prune -f
+
+            echo "Izwelakhe deployment complete."

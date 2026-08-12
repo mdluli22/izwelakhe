@@ -11,7 +11,6 @@ import Industries from "@/components/sections/Industries";
 import Process from "@/components/sections/Process";
 import Projects from "@/components/sections/Projects";
 import CTA from "@/components/sections/CTA";
-import Contact from "@/components/sections/Contact";
 import ScrollToTop from "@/components/ScrollToTop";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -196,7 +195,6 @@ export default function Page() {
       <Process />
       <Projects />
       <CTA />
-      <Contact />
       <footer className="site-footer">
         <div className="section-shell">
           <strong>Izwelakhe</strong>
@@ -204,7 +202,7 @@ export default function Page() {
             <a href="#mission">Mission</a>
             <a href="#capabilities">Capabilities</a>
             <a href="#industries">Industries</a>
-            <a href="#contact">Contact</a>
+            <a href="/contact">Contact</a>
           </nav>
         </div>
       </footer>

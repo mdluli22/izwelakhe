@@ -35,6 +35,37 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+## Contact form email delivery
+
+The `/contact` form sends enquiries to `sifiso@izwelakheconsulting.co.za` through Resend.
+
+1. Verify `izwelakheconsulting.co.za` in Resend.
+2. Copy `.env.example` to `.env.local`.
+3. Add a Resend API key and a sender address on the verified domain.
+
+The API key is read only by the server-side `/api/contact` route and must never be exposed as a public environment variable.
+
+## CI/CD and VPS deployment
+
+The GitHub Actions workflow in `.github/workflows/clean-main.yml` runs linting and a production build for pull requests targeting `clean-main` and for pushes to that branch. After validation succeeds on a push to `clean-main`, it connects to the private VPS over SSH and rebuilds the Docker Compose service. Manual workflow runs validate the project without deploying it.
+
+Configure these secrets in the GitHub `production` environment or repository settings:
+
+- `SSH_HOST`: VPS hostname or IP address
+- `SSH_USER`: VPS deployment user
+- `SSH_PRIVATE_KEY`: private key used by GitHub Actions
+- `APP_DIR`: absolute path to the repository on the VPS
+
+Create a `.env` file inside `APP_DIR` on the VPS with:
+
+```dotenv
+APP_PORT=3001
+RESEND_API_KEY=re_replace_with_your_key
+CONTACT_FROM_EMAIL=Izwelakhe Website <website@izwelakheconsulting.co.za>
+```
+
+The Compose service binds to `127.0.0.1:${APP_PORT}` so it can sit behind the VPS reverse proxy without exposing the Next.js server directly. Change `APP_PORT` if port `3001` is already occupied.
+
 ## Sections
 | Section | Description |
 |---|---|

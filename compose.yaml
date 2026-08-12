@@ -1,0 +1,19 @@
+services:
+  website:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: izwelakhe-website
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${APP_PORT:-3001}:3000"
+    environment:
+      NODE_ENV: production
+      RESEND_API_KEY: "${RESEND_API_KEY:?RESEND_API_KEY must be set}"
+      CONTACT_FROM_EMAIL: "${CONTACT_FROM_EMAIL:-Izwelakhe Website <website@izwelakheconsulting.co.za>}"
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://127.0.0.1:3000/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s

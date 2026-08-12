@@ -100,12 +100,15 @@ export default function Hero() {
         </a>
         <nav className="hero-nav__links" aria-label="Primary">
           {NAV.map((item) => (
-            <a key={item} href={`#${item.toLowerCase().replace(/\s/g, "-")}`}>
+            <a
+              key={item}
+              href={item === "Contact" ? "/contact" : `#${item.toLowerCase().replace(/\s/g, "-")}`}
+            >
               {item}
             </a>
           ))}
         </nav>
-        <a href="#contact" className="hero-nav__portal">
+        <a href="/contact" className="hero-nav__portal">
           Start a project
         </a>
       </header>
