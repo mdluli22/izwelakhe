@@ -148,3 +148,49 @@
 @media (prefers-reduced-motion: reduce) {
   .reveal-up { opacity: 1 !important; visibility: visible !important; transform: none !important; }
 }
+
+/* Return links use the same pill silhouette as the other action buttons. */
+.service-hero--clean .service-back,
+.contact-page__footer a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  width: fit-content;
+  min-height: 44px;
+  padding: 0.78rem 1rem;
+  border: 1px solid #171b1e;
+  border-radius: 999px;
+  background: #171b1e;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
+  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.service-hero--clean .service-back {
+  border-color: #fff;
+  background: #fff;
+  color: #171b1e;
+}
+
+.service-hero--clean .service-back::before { color: currentColor; }
+
+.service-hero--clean .service-back:hover,
+.contact-page__footer a:hover {
+  background: #e4c47a;
+  border-color: #e4c47a;
+  color: #171b1e;
+  transform: translateY(-2px);
+}
+
+.service-hero--clean .service-back:focus-visible,
+.contact-page__footer a:focus-visible {
+  outline: 3px solid #ba8121;
+  outline-offset: 4px;
+}
+
+.service-hero--clean .service-back:focus-visible {
+  background: #fff;
+  color: #171b1e;
+}
