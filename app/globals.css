@@ -60,7 +60,6 @@ canvas {
 }
 
 .hero-premium {
-  cursor: none;
   color: #f6f1e6;
   background: #060708;
   margin-bottom: clamp(-9rem, -14vh, -5rem);
@@ -401,52 +400,6 @@ canvas {
   transform: translateY(0);
 }
 
-.hero-cursor {
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 80;
-  display: none;
-  width: 34px;
-  height: 34px;
-  margin: -17px 0 0 -17px;
-  border: 1px solid rgba(212, 173, 74, 0.86);
-  border-radius: 50%;
-  opacity: 0;
-  pointer-events: none;
-  box-shadow: 0 0 24px rgba(212, 173, 74, 0.28);
-  transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
-  will-change: transform, opacity;
-}
-
-.hero-cursor::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 4px;
-  height: 4px;
-  background: #f1dd9a;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.hero-cursor--visible {
-  opacity: 1;
-}
-
-.hero-cursor--interactive {
-  background: rgba(212, 173, 74, 0.1);
-  border-color: rgba(246, 241, 230, 0.72);
-  box-shadow: 0 0 34px rgba(212, 173, 74, 0.38);
-}
-
-@media (min-width: 641px) and (pointer: fine) {
-  .hero-cursor {
-    display: block;
-  }
-}
-
 @keyframes heroNoise {
   0% {
     transform: translate3d(0, 0, 0);
@@ -461,16 +414,6 @@ canvas {
   }
 }
 
-@media (pointer: coarse) {
-  .hero-premium {
-    cursor: auto;
-  }
-
-  .hero-cursor {
-    display: none;
-  }
-}
-
 @media (max-width: 640px) {
   .hero-premium {
     min-height: 100svh;
@@ -478,10 +421,6 @@ canvas {
 
   .hero-media__image {
     object-position: 61% center;
-  }
-
-  .hero-cursor {
-    display: none;
   }
 
   .hero-nav {

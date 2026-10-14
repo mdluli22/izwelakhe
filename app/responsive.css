@@ -1,0 +1,150 @@
+/* Clear action buttons and touch-friendly navigation. */
+.hero-action,
+.hero-nav__portal,
+.capability-link,
+.cinematic-button,
+.service-back {
+  border-color: #171b1e;
+  background: #171b1e;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
+  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.hero-action,
+.hero-nav__portal,
+.service-back {
+  background: #fff;
+  border-color: #fff;
+  color: #171b1e;
+}
+
+.hero-action:hover,
+.hero-nav__portal:hover,
+.capability-link:hover,
+.cinematic-button:hover,
+.service-back:hover {
+  background: #e4c47a;
+  border-color: #e4c47a;
+  color: #171b1e;
+  transform: translateY(-2px);
+}
+
+:where(a, button, summary, input, select, textarea):focus-visible {
+  outline: 3px solid #ba8121;
+  outline-offset: 4px;
+}
+
+:where(.hero-action, .hero-nav__portal, .capability-link, .cinematic-button):active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+.hero-nav__toggle { display: none; }
+.hero-nav__links a,
+.service-nav nav a,
+.contact-page__nav nav a,
+.site-footer nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.hero-content__inner { grid-template-columns: minmax(0, 1fr); }
+.hero-action--primary { color: #171b1e; }
+.contact-page__hero-copy a { overflow-wrap: anywhere; }
+.contact-page-form input,
+.contact-page-form select,
+.contact-page-form textarea { font-size: 16px; }
+
+@media (max-width: 900px) {
+  .hero-nav {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: rgba(8, 12, 15, 0.9);
+  }
+  .hero-nav__brand { width: 8rem; }
+  .hero-nav__toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0.65rem 1rem;
+    border: 1px solid #fff;
+    border-radius: 999px;
+    background: transparent;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .hero-nav__links {
+    display: none;
+    grid-column: 1 / -1;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding-block: 0.5rem;
+  }
+  .hero-nav__links.is-open { display: flex; }
+  .hero-nav__links a {
+    padding: 0.65rem 0.75rem;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 0.85rem;
+  }
+  .hero-nav__links a:hover { background: rgba(255, 255, 255, 0.12); }
+  .hero-nav__portal {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+  .hero-premium { margin-bottom: 0; }
+  .hero-content { padding: 12rem 1rem max(2rem, env(safe-area-inset-bottom)); }
+  .industry-track {
+    width: 100%;
+    overflow-x: auto;
+    transform: none !important;
+    padding: 1rem 1rem 2rem;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+  }
+  .industry-pin { display: block; min-height: auto; overflow: visible; }
+  .industry-pin::before,
+  .industry-pin::after,
+  .industry-cue,
+  .industry-signal,
+  .industry-progress { display: none; }
+  .industry-card,
+  .industry-card.is-active {
+    flex: 0 0 min(82vw, 28rem);
+    min-height: auto;
+    opacity: 1;
+    transform: none;
+    scroll-snap-align: center;
+  }
+  .industry-card:not(.is-active) h3,
+  .industry-card:not(.is-active) p { opacity: 1; transform: none; }
+}
+
+@media (max-width: 640px) {
+  .hero-actions { margin-top: 0; }
+  .service-nav,
+  .contact-page__nav { flex-wrap: wrap; gap: 0.5rem; padding: 0.75rem 1rem; }
+  .service-nav nav,
+  .contact-page__nav nav { flex-wrap: wrap; gap: 0.75rem; }
+  .service-nav nav a,
+  .contact-page__nav nav a { font-size: 0.8rem; }
+  .contact-page__nav nav a:nth-child(2) { display: inline-flex; }
+  .service-nav__brand,
+  .contact-page__brand { width: 7rem; }
+  .contact-page__hero h1 { font-size: clamp(2.5rem, 11vw, 4rem); }
+  .section-shell { min-width: 0; }
+  .section-shell > *,
+  .contact-page-form__grid > * { min-width: 0; }
+  .faq-item summary { min-height: 48px; }
+  .scroll-top { bottom: max(1rem, env(safe-area-inset-bottom)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-up { opacity: 1 !important; visibility: visible !important; transform: none !important; }
+}

@@ -64,13 +64,11 @@ export default function Page() {
     });
 
     heroTimeline
-      .to(".hero-title", { scale: 0.86, y: -72, transformOrigin: "left center", ease: "none" }, 0)
-      .to(".hero-copy, .hero-kicker", { y: -48, autoAlpha: 0.35, ease: "none" }, 0)
       .to(".hero-media__image", { scale: 1.08, y: -28, ease: "none" }, 0)
       .fromTo(".mission-section", { y: 72 }, { y: 0, ease: "none" }, 0);
 
     const media = gsap.matchMedia();
-    media.add("(min-width: 768px)", () => {
+    media.add("(min-width: 901px)", () => {
       const stage = document.querySelector<HTMLElement>(".capability-stage");
       const shell = document.querySelector<HTMLElement>(".capability-shell");
       const panels = gsap.utils.toArray<HTMLElement>("[data-capability-panel]");
@@ -109,7 +107,7 @@ export default function Page() {
       return () => capabilityTrigger.kill();
     });
 
-    media.add("(min-width: 768px)", () => {
+    media.add("(min-width: 901px)", () => {
       const section = document.querySelector<HTMLElement>(".industries-section");
       const pin = document.querySelector<HTMLElement>(".industry-pin");
       const track = document.querySelector<HTMLElement>(".industry-track");
