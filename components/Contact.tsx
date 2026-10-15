@@ -1,5 +1,7 @@
 "use client";
 
+import Icon from "@/components/ui/Icon";
+
 import React from "react";
 
 type FormData = { name: string; email: string; phone: string; service: string; message: string };
@@ -21,21 +23,21 @@ export default function Contact({ formData, formSent, onChange, onSubmit }: Prop
             <h2 className="h2">Let&apos;s Start<br /><span className="gold">a Conversation.</span></h2>
             <div className="contact__info">
               <div className="contact__info-item">
-                <span className="contact__info-icon">✉</span>
+                <span className="contact__info-icon"><Icon name="mail" /></span>
                 <div>
                   <p className="contact__info-label">Email</p>
                   <p className="contact__info-val">info@izwelakheconsulting.co.za</p>
                 </div>
               </div>
               <div className="contact__info-item">
-                <span className="contact__info-icon">◷</span>
+                <span className="contact__info-icon"><Icon name="clock" /></span>
                 <div>
                   <p className="contact__info-label">Office Hours</p>
                   <p className="contact__info-val">Mon – Fri · 08:00 – 17:00</p>
                 </div>
               </div>
               <div className="contact__info-item">
-                <span className="contact__info-icon">◉</span>
+                <span className="contact__info-icon"><Icon name="location" /></span>
                 <div>
                   <p className="contact__info-label">Based In</p>
                   <p className="contact__info-val">South Africa</p>
@@ -46,7 +48,7 @@ export default function Contact({ formData, formSent, onChange, onSubmit }: Prop
           <div className="contact__right">
             {formSent ? (
               <div className="form-success">
-                <div className="form-success__icon">✓</div>
+                <div className="form-success__icon"><Icon name="check" /></div>
                 <h3 className="form-success__title">Message Received</h3>
                 <p className="form-success__body">We&apos;ll be in touch with you shortly.</p>
               </div>
@@ -82,7 +84,7 @@ export default function Contact({ formData, formSent, onChange, onSubmit }: Prop
                   <label className="form__label">Message</label>
                   <textarea name="message" className="form__input form__textarea" placeholder="Tell us about your project…" rows={5} value={formData.message} onChange={onChange} required />
                 </div>
-                <button type="submit" className="btn btn--gold btn--full">SEND MESSAGE →</button>
+                <button type="submit" className="btn btn--gold btn--full">SEND MESSAGE <Icon name="arrowRight" /></button>
               </form>
             )}
           </div>

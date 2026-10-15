@@ -1,5 +1,7 @@
 "use client";
 
+import Icon from "@/components/ui/Icon";
+
 import React from "react";
 
 export default function About() {
@@ -33,15 +35,15 @@ export default function About() {
             </p>
             <div className="about__feature-row">
               <div className="about__feature">
-                <span className="about__feature-icon">◈</span>
+                <span className="about__feature-icon"><Icon name="strategy" /></span>
                 <span>Strategic depth</span>
               </div>
               <div className="about__feature">
-                <span className="about__feature-icon">◉</span>
+                <span className="about__feature-icon"><Icon name="construction" /></span>
                 <span>Proven execution</span>
               </div>
               <div className="about__feature">
-                <span className="about__feature-icon">◎</span>
+                <span className="about__feature-icon"><Icon name="property" /></span>
                 <span>SA-market ready</span>
               </div>
             </div>

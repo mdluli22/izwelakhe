@@ -1,3 +1,4 @@
+import Icon from "@/components/ui/Icon";
 import Image from "next/image";
 import Link from "next/link";
 import ContactForm from "@/components/contact/ContactForm";
@@ -61,7 +62,7 @@ export default function ContactPage() {
             </div>
             <div className="contact-page__direct">
               <span>Prefer a direct introduction?</span>
-              <a href="mailto:info@izwelakheconsulting.co.za">Email Izwelakhe ↗</a>
+              <a href="mailto:info@izwelakheconsulting.co.za">Email Izwelakhe <Icon name="arrowUpRight" /></a>
               <p>South Africa · Project enquiries nationwide</p>
             </div>
           </aside>
@@ -85,7 +86,7 @@ export default function ContactPage() {
                 <span>0{index + 1}</span>
                 <h3>{service.title}</h3>
                 <p>{service.desc}</p>
-                <strong>Explore service ↗</strong>
+                <strong>Explore service <Icon name="arrowUpRight" /></strong>
               </Link>
             ))}
           </div>
@@ -96,7 +97,7 @@ export default function ContactPage() {
         <div className="section-shell">
           <strong>Izwelakhe</strong>
           <span>Strategy · Construction · Property</span>
-          <Link href="/">Back to home ↑</Link>
+          <Link href="/">Back to home <Icon name="arrowUp" /></Link>
         </div>
       </footer>
     </main>

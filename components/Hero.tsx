@@ -1,5 +1,7 @@
 "use client";
 
+import Icon from "@/components/ui/Icon";
+
 import { useState } from "react";
 import Image from "next/image";
 import { NAV } from "@/lib/constants";
@@ -25,7 +27,7 @@ export default function Hero() {
           aria-controls="primary-navigation"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          {menuOpen ? "Close ✕" : "Menu ☰"}
+          {menuOpen ? "Close" : "Menu"}{" "}<Icon name={menuOpen ? "close" : "menu"} />
         </button>
         <nav id="primary-navigation" className={`hero-nav__links${menuOpen ? " is-open" : ""}`} aria-label="Primary">
           {NAV.map((item) => (

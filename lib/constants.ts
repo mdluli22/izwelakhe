@@ -1,6 +1,8 @@
+import type { IconName } from "@/components/ui/Icon";
+
 export type Service = {
   id: string;
-  icon: string;
+  icon: IconName;
   image: string;
   title: string;
   tagline: string;
@@ -14,7 +16,7 @@ export type Service = {
 };
 
 export type Stat = { num: string; label: string };
-export type WhyItem = { icon: string; title: string; body: string };
+export type WhyItem = { icon: IconName; title: string; body: string };
 export type Industry = { name: string; detail: string; persona: string; image: string };
 export type ProcessStep = { step: string; title: string; body: string };
 export type Project = { title: string; sector: string; body: string; metric: string; image: string };
@@ -22,7 +24,7 @@ export type Project = { title: string; sector: string; body: string; metric: str
 export const SERVICES: Service[] = [
   {
     id: "consulting",
-    icon: "◈",
+    icon: "strategy",
     image: "/capability-consulting.png",
     title: "Business Consulting",
     tagline: "STRATEGY · GROWTH · RESULTS",
@@ -62,7 +64,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: "construction",
-    icon: "◉",
+    icon: "construction",
     image: "/capability-construction.png",
     title: "Construction & Maintenance",
     tagline: "BUILD · MAINTAIN · UPGRADE",
@@ -102,7 +104,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: "property",
-    icon: "◎",
+    icon: "property",
     image: "/capability-property.png",
     title: "Property Development",
     tagline: "DEVELOP · MANAGE · OPTIMISE",
@@ -150,10 +152,10 @@ export const SERVICES: Service[] = [
 // ];
 
 export const WHY: WhyItem[] = [
-  { icon: "⬡", title: "Multi-Disciplinary", body: "Strategy, construction, and property under one roof — no coordination overhead." },
-  { icon: "◈", title: "Real-World Execution", body: "Practical solutions built on proven, local market experience." },
-  { icon: "◉", title: "Long-Term Mindset", body: "Every engagement is designed for sustained impact, not short-term gain." },
-  { icon: "◎", title: "SA Market-Ready", body: "We understand South African economic realities and build solutions that fit them." },
+  { icon: "layers", title: "Multi-Disciplinary", body: "Strategy, construction, and property under one roof — no coordination overhead." },
+  { icon: "strategy", title: "Real-World Execution", body: "Practical solutions built on proven, local market experience." },
+  { icon: "construction", title: "Long-Term Mindset", body: "Every engagement is designed for sustained impact, not short-term gain." },
+  { icon: "property", title: "SA Market-Ready", body: "We understand South African economic realities and build solutions that fit them." },
 ];
 
 export const NAV = ["Mission", "Capabilities", "Industries", "Process", "Contact"] as string[];

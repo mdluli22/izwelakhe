@@ -1,3 +1,4 @@
+import Icon from "@/components/ui/Icon";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -175,7 +176,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
               <Link href={`/services/${item.id}`} key={item.id} className="service-next__card">
                 <strong>{item.title}</strong>
                 <small>{item.desc}</small>
-                <span>View service →</span>
+                <span>View service <Icon name="arrowRight" /></span>
               </Link>
             ))}
           </div>

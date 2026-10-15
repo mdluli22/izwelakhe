@@ -1,5 +1,7 @@
 "use client";
 
+import Icon from "@/components/ui/Icon";
+
 import { useEffect, useState } from "react";
 
 export default function ScrollToTop() {
@@ -27,7 +29,7 @@ export default function ScrollToTop() {
       onClick={scrollToTop}
       aria-label="Scroll to top"
     >
-      <span aria-hidden="true">↑</span>
+      <span aria-hidden="true"><Icon name="arrowUp" /></span>
     </button>
   );
 }

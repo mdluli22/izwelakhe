@@ -1,5 +1,7 @@
 "use client";
 
+import Icon from "@/components/ui/Icon";
+
 import React from "react";
 import { SERVICES } from "../lib/constants";
 
@@ -27,7 +29,7 @@ export default function Services({ activeService, setActiveService }: Props) {
               className={`services__tab ${activeService === i ? "services__tab--active" : ""}`}
               onClick={() => setActiveService(i)}
             >
-              <span className="services__tab-icon">{s.icon}</span>
+              <span className="services__tab-icon"><Icon name={s.icon} /></span>
               <span className="services__tab-title">{s.title}</span>
               <span className="services__tab-num">0{i + 1}</span>
             </button>
@@ -43,12 +45,12 @@ export default function Services({ activeService, setActiveService }: Props) {
           </div>
           <div className="services__panel-right">
             <div className="services__panel-header">
-              <span className="services__panel-icon">{SERVICES[activeService].icon}</span>
+              <span className="services__panel-icon"><Icon name={SERVICES[activeService].icon} /></span>
               <span>Capabilities</span>
             </div>
             {SERVICES[activeService].items.map((item) => (
               <div key={item} className="services__item">
-                <span className="services__item-arrow">→</span>
+                <span className="services__item-arrow"><Icon name="arrowRight" /></span>
                 <span>{item}</span>
               </div>
             ))}

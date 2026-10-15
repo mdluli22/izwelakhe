@@ -1,5 +1,7 @@
 "use client";
 
+import Icon from "@/components/ui/Icon";
+
 import React from "react";
 
 export default function Ticker() {
@@ -9,11 +11,11 @@ export default function Ticker() {
       <div className="ticker__track">
         {items.flatMap((t, i) => [
           <span key={`a${i}`} className="ticker__item">{t}</span>,
-          <span key={`b${i}`} className="ticker__sep">◆</span>,
+          <span key={`b${i}`} className="ticker__sep"><Icon name="diamond" /></span>,
         ])}
         {items.flatMap((t, i) => [
           <span key={`c${i}`} className="ticker__item">{t}</span>,
-          <span key={`d${i}`} className="ticker__sep">◆</span>,
+          <span key={`d${i}`} className="ticker__sep"><Icon name="diamond" /></span>,
         ])}
       </div>
     </div>
