@@ -5,6 +5,7 @@ services:
       dockerfile: Dockerfile
       args:
         SITE_URL: "${SITE_URL:-https://izwelakheconsulting.co.za}"
+        NEXT_PUBLIC_WHATSAPP_NUMBER: "${NEXT_PUBLIC_WHATSAPP_NUMBER:-27739599231}"
     container_name: izwelakhe-website
     restart: unless-stopped
     ports:

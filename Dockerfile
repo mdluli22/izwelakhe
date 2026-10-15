@@ -14,6 +14,8 @@ COPY --from=dependencies /app/node_modules ./node_modules
 COPY . .
 ARG SITE_URL=https://izwelakheconsulting.co.za
 ENV SITE_URL=$SITE_URL
+ARG NEXT_PUBLIC_WHATSAPP_NUMBER=27739599231
+ENV NEXT_PUBLIC_WHATSAPP_NUMBER=$NEXT_PUBLIC_WHATSAPP_NUMBER
 RUN npm run build
 
 FROM node:22-alpine AS runner
