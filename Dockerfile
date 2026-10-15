@@ -12,6 +12,8 @@ RUN npm ci
 FROM base AS builder
 COPY --from=dependencies /app/node_modules ./node_modules
 COPY . .
+ARG SITE_URL=https://izwelakheconsulting.co.za
+ENV SITE_URL=$SITE_URL
 RUN npm run build
 
 FROM node:22-alpine AS runner

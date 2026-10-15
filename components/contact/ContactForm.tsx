@@ -22,6 +22,7 @@ export default function ContactForm() {
   const [status, setStatus] = useState<SubmissionStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const submissionId = useRef<string | null>(null);
+  const sending = useRef(false);
 
   const updateField = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
@@ -33,6 +34,8 @@ export default function ContactForm() {
 
   const submitForm = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (sending.current) return;
+    sending.current = true;
     setStatus("submitting");
     setErrorMessage("");
     submissionId.current ??= crypto.randomUUID();
@@ -56,11 +59,13 @@ export default function ContactForm() {
     } catch (error) {
       setStatus("error");
       setErrorMessage(error instanceof Error ? error.message : "We could not send your enquiry. Please try again.");
+    } finally {
+      sending.current = false;
     }
   };
 
   return (
-    <form className="contact-page-form" onSubmit={submitForm}>
+    <form className="contact-page-form" onSubmit={submitForm} aria-busy={status === "submitting"}>
       <div className="contact-page-form__heading">
         <div>
           <p className="section-kicker">Project brief</p>
@@ -69,7 +74,8 @@ export default function ContactForm() {
         <span>Fields marked * are required</span>
       </div>
 
-      <div className="contact-page-form__grid">
+      <fieldset className="contact-page-form__grid" disabled={status === "submitting"}>
+        <legend className="sr-only">Project details</legend>
         <label>
           <span>Name *</span>
           <input name="name" autoComplete="name" value={formData.name} onChange={updateField} placeholder="Your full name" minLength={2} maxLength={120} required />
@@ -124,7 +130,7 @@ export default function ContactForm() {
           <span>Website</span>
           <input name="website" value={formData.website} onChange={updateField} tabIndex={-1} autoComplete="off" />
         </label>
-      </div>
+      </fieldset>
 
       <div className="contact-page-form__submit">
         <button className="cinematic-button" type="submit" disabled={status === "submitting"}>

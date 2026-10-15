@@ -2,12 +2,13 @@
 
 import Icon from "@/components/ui/Icon";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { NAV } from "@/lib/constants";
 
 export default function Hero() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuToggle = useRef<HTMLButtonElement>(null);
   return (
     <section className="hero-premium relative h-[100svh] min-h-[560px] w-full overflow-hidden bg-black">
       <header className="hero-nav">
@@ -23,13 +24,19 @@ export default function Hero() {
         <button
           type="button"
           className="hero-nav__toggle"
+          ref={menuToggle}
           aria-expanded={menuOpen}
           aria-controls="primary-navigation"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? "Close" : "Menu"}{" "}<Icon name={menuOpen ? "close" : "menu"} />
         </button>
-        <nav id="primary-navigation" className={`hero-nav__links${menuOpen ? " is-open" : ""}`} aria-label="Primary">
+        <nav id="primary-navigation" className={`hero-nav__links${menuOpen ? " is-open" : ""}`} aria-label="Primary" onKeyDown={(event) => {
+          if (event.key === "Escape" && menuOpen) {
+            setMenuOpen(false);
+            menuToggle.current?.focus();
+          }
+        }}>
           {NAV.map((item) => (
             <a
               onClick={() => setMenuOpen(false)}

@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        SITE_URL: "${SITE_URL:-https://izwelakheconsulting.co.za}"
     container_name: izwelakhe-website
     restart: unless-stopped
     ports:

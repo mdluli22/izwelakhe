@@ -4,6 +4,8 @@ import { NextResponse } from "next/server";
 const CONTACT_RECIPIENT = "sifiso@izwelakheconsulting.co.za";
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX = 5;
+const MAX_TRACKED_CLIENTS = 10_000;
+const MAX_REQUEST_BYTES = 32_768;
 
 export const runtime = "nodejs";
 
@@ -113,6 +115,15 @@ function getClientKey(request: Request) {
 
 function isRateLimited(clientKey: string) {
   const now = Date.now();
+  for (const [key, timestamps] of recentRequests) {
+    if (timestamps.every(timestamp => now - timestamp >= RATE_LIMIT_WINDOW_MS)) {
+      recentRequests.delete(key);
+    }
+  }
+  // Bound memory even during a burst of previously unseen clients.
+  if (!recentRequests.has(clientKey) && recentRequests.size >= MAX_TRACKED_CLIENTS) {
+    return true;
+  }
   const activeRequests = (recentRequests.get(clientKey) ?? []).filter(
     (timestamp) => now - timestamp < RATE_LIMIT_WINDOW_MS
   );
@@ -209,8 +220,32 @@ function getSmtpConfig() {
 export async function POST(request: Request) {
   let rawPayload: unknown;
 
+  if (!request.headers.get("content-type")?.toLowerCase().startsWith("application/json")) {
+    return NextResponse.json({ error: "Expected a JSON request." }, { status: 415 });
+  }
+
   try {
-    rawPayload = await request.json();
+    const reader = request.body?.getReader();
+    if (!reader) return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
+    const decoder = new TextDecoder();
+    let bytes = 0;
+    let body = "";
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        bytes += value.byteLength;
+        if (bytes > MAX_REQUEST_BYTES) {
+          await reader.cancel();
+          return NextResponse.json({ error: "Request body is too large." }, { status: 413 });
+        }
+        body += decoder.decode(value, { stream: true });
+      }
+      body += decoder.decode();
+      rawPayload = JSON.parse(body);
+    } finally {
+      reader.releaseLock();
+    }
   } catch {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }

@@ -3,13 +3,7 @@
 import { Canvas } from "@react-three/fiber";
 import * as THREE from "three";
 import MountainRange from "./MountainRange";
-import {
-  EffectComposer,
-  Bloom,
-  DepthOfField,
-  Noise,
-  Vignette,
-} from "@react-three/postprocessing";
+
 
 export default function HeroScene() {
   return (

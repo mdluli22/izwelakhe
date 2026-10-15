@@ -194,3 +194,54 @@
   background: #fff;
   color: #171b1e;
 }
+
+/* Content remains readable before hydration and when motion is disabled. */
+.site-home:not([data-motion="enabled"]) .capability-shell {
+  display: block;
+  height: auto;
+  min-height: 0;
+}
+.site-home:not([data-motion="enabled"]) .capability-panels {
+  display: grid;
+  min-height: 0;
+}
+.site-home:not([data-motion="enabled"]) .capability-panel {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
+}
+.site-home:not([data-motion="enabled"]) .capability-content > * {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+.site-home:not([data-motion="enabled"]) .industry-track {
+  max-width: 100%;
+  overflow-x: auto;
+}
+.site-home:not([data-motion="enabled"]) .industry-card {
+  opacity: 1;
+  transform: none;
+}
+.contact-page-form fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (min-width: 901px) {
+  .site-home[data-motion="enabled"] .capability-panel:not(.is-active) {
+    visibility: hidden;
+  }
+}
