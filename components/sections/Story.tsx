@@ -13,8 +13,8 @@ export default function Story() {
         </div>
         <div className="mission-copy reveal-up">
           <p>
-            Izwelakhe operates at the intersection of strategic thinking, practical construction, and property
-            investment. We turn vision into disciplined execution for South African ventures ready to build what
+            Izwelakhe is a South African company providing business consulting, construction and maintenance,
+            and property development services. We turn vision into disciplined execution for South African ventures ready to build what
             lasts.
           </p>
         </div>

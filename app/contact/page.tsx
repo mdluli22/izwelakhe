@@ -1,13 +1,11 @@
+import { pageMetadata } from "@/lib/seo";
 import Icon from "@/components/ui/Icon";
 import Image from "next/image";
 import Link from "next/link";
 import ContactForm from "@/components/contact/ContactForm";
 import { SERVICES } from "@/lib/constants";
 
-export const metadata = {
-  title: "Contact | Izwelakhe",
-  description: "Start a conversation with Izwelakhe about business consulting, construction, maintenance, or property development.",
-};
+export const metadata = pageMetadata("Contact | Izwelakhe", "Contact Izwelakhe about business consulting, construction, maintenance, or property development in South Africa.", "/contact");
 
 const expectations = [
   ["01", "Share the context", "Tell us what you are building, improving, or trying to unlock."],

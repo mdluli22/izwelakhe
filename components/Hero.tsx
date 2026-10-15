@@ -59,6 +59,7 @@ export default function Hero() {
 
       <div className="hero-content">
         <div className="hero-content__inner">
+          <h1 className="sr-only">Izwelakhe: Business Consulting, Construction and Property Development in South Africa</h1>
           <div className="hero-actions">
             <a href="#projects" className="hero-action hero-action--primary">
               Explore our work

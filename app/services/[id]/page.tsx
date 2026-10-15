@@ -1,3 +1,5 @@
+import StructuredData from "@/components/StructuredData";
+import { absoluteUrl, pageMetadata } from "@/lib/seo";
 import Icon from "@/components/ui/Icon";
 import Link from "next/link";
 import Image from "next/image";
@@ -53,10 +55,7 @@ export async function generateMetadata({ params }: ServicePageProps) {
     };
   }
 
-  return {
-    title: `${service.title} | Izwelakhe`,
-    description: service.desc,
-  };
+  return pageMetadata(`${service.title} | Izwelakhe`, service.desc, `/services/${service.id}`);
 }
 
 export default async function ServicePage({ params }: ServicePageProps) {
@@ -72,6 +71,14 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
   return (
     <main className={`service-page ${serviceConfig.pageClass}`}>
+      <StructuredData data={{
+        "@context": "https://schema.org",
+        "@graph": [
+          { "@type": "Service", "@id": absoluteUrl(`/services/${service.id}#service`), name: service.title, serviceType: service.title, description: service.desc, url: absoluteUrl(`/services/${service.id}`), provider: { "@type": "Organization", "@id": absoluteUrl("/#organization"), name: "Izwelakhe", url: absoluteUrl("/") }, areaServed: { "@type": "Country", name: "South Africa" } },
+          { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") }, { "@type": "ListItem", position: 2, name: service.title, item: absoluteUrl(`/services/${service.id}`) }] },
+          { "@type": "FAQPage", mainEntity: service.faqs.map(faq => ({ "@type": "Question", name: faq.question, acceptedAnswer: { "@type": "Answer", text: faq.answer } })) },
+        ],
+      }} />
       <header className="service-nav">
         <Link href="/" className="service-nav__brand" aria-label="Izwelakhe home">
           <Image
