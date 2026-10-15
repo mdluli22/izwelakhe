@@ -1,6 +1,36 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
 
+.whatsapp-button {
+  position: fixed;
+  left: max(24px, env(safe-area-inset-left));
+  bottom: max(24px, env(safe-area-inset-bottom));
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border: 2px solid var(--color-gold);
+  border-radius: 50%;
+  background: #fff;
+  color: #242222;
+  box-shadow: 0 6px 24px rgb(0 0 0 / 18%);
+  transition: box-shadow 180ms ease;
+}
+
+.whatsapp-button svg { width: 42px; height: 42px; }
+.whatsapp-button:hover { box-shadow: 0 9px 28px rgb(0 0 0 / 24%); }
+.whatsapp-button:focus-visible { outline: 3px solid var(--color-gold); outline-offset: 4px; }
+
+@media (max-width: 600px) {
+  .whatsapp-button { left: max(16px, env(safe-area-inset-left)); bottom: max(16px, env(safe-area-inset-bottom)); width: 60px; height: 60px; }
+  .whatsapp-button svg { width: 34px; height: 34px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-button { transition: none; }
+}
+
 :root {
   --font-primary: "Manrope", "Avenir Next", Avenir, "Helvetica Neue", Arial, sans-serif;
   --color-primary: #ffffff;

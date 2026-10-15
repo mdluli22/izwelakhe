@@ -3,6 +3,7 @@ import "./responsive.css";
 
 import type { Metadata } from "next";
 import { SITE_URL } from "@/lib/seo";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -19,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body>{children}</body>
+      <body>{children}<WhatsAppButton /></body>
     </html>
   );
 }
