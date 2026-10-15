@@ -14,6 +14,8 @@ Canonical URLs, social metadata, JSON-LD business and service data, `/robots.txt
 
 The sitemap includes the homepage, contact page and all service pages. FAQ structured data uses the same content shown on service pages. `llms.txt` is a supplementary guide, not a guarantee of indexing or AI citations.
 
+`/agents.md` provides a public business summary for assistants, and `/llms-full.txt` includes service details, intended outcomes, process and FAQs from the same constants used on the website. Both are linked from `/llms.txt`. The public `/agents.md` is business content, not repository development instructions. These supplementary files are not universally supported standards and do not guarantee recommendations or trust. `/robots.txt` explicitly permits search, user-request and training agents for OpenAI, Anthropic, Perplexity and Google while retaining the `/api/` exclusion. Robots rules are crawler guidance, not access control; hosting and firewall policies also affect access.
+
 After deployment, verify these endpoints and canonicals on the public domain, submit the sitemap in Google Search Console and Bing Webmaster Tools, and ensure hosting or firewall bot protection permits search crawlers. Indexing and citations depend on external services.
 
 ## Contact form configuration
