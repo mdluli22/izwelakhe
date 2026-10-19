@@ -129,6 +129,23 @@ canvas {
   will-change: transform;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .hero-media {
+    animation: heroDrift 16s linear infinite alternate;
+    will-change: transform;
+  }
+}
+
+@keyframes heroDrift {
+  from {
+    transform: scale(1.06) translate3d(-1.5%, 0, 0);
+  }
+
+  to {
+    transform: scale(1.2) translate3d(1.5%, -1%, 0);
+  }
+}
+
 .hero::before {
   content: "";
   position: absolute;
@@ -178,6 +195,28 @@ canvas {
 .hero-footer {
   position: relative;
   z-index: 3;
+}
+
+.hero-slogan {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 30;
+  width: calc(100% - 2.5rem);
+  margin: 0;
+  transform: translate(-50%, -50%);
+  color: #f6f1e6;
+  font-size: clamp(2rem, 5.5vw, 5.5rem);
+  font-weight: 500;
+  line-height: 1.14;
+  letter-spacing: -0.045em;
+  text-align: center;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.85);
+  pointer-events: none;
+}
+
+.hero-slogan__line {
+  display: block;
 }
 
 .hero-content {

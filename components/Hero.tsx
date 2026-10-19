@@ -2,13 +2,41 @@
 
 import Icon from "@/components/ui/Icon";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { NAV } from "@/lib/constants";
 
+const SLOGAN = "Building vision.\nCreating value.";
+
 export default function Hero() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [typedLength, setTypedLength] = useState(SLOGAN.length);
   const menuToggle = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (motion.matches) return;
+
+    let length = 0;
+    const interval = window.setInterval(() => {
+      length += 1;
+      setTypedLength(length);
+      if (length >= SLOGAN.length) window.clearInterval(interval);
+    }, 85);
+
+    const showFullSlogan = () => {
+      if (motion.matches) {
+        window.clearInterval(interval);
+        setTypedLength(SLOGAN.length);
+      }
+    };
+    motion.addEventListener("change", showFullSlogan);
+    return () => {
+      window.clearInterval(interval);
+      motion.removeEventListener("change", showFullSlogan);
+    };
+  }, []);
+
   return (
     <section className="hero-premium relative h-[100svh] min-h-[560px] w-full overflow-hidden bg-black">
       <header className="hero-nav">
@@ -63,6 +91,22 @@ export default function Hero() {
           quality={90}
         />
       </div>
+
+      <p className="hero-slogan" aria-label="Building vision. Creating value.">
+        {SLOGAN.split("\n").map((line, lineIndex) => (
+          <span className="hero-slogan__line" aria-hidden="true" key={line}>
+            {Array.from(line).map((character, characterIndex) => (
+              <span
+                className="hero-slogan__character"
+                style={{ opacity: lineIndex * 17 + characterIndex < typedLength ? 1 : 0 }}
+                key={characterIndex}
+              >
+                {character === " " ? "\u00a0" : character}
+              </span>
+            ))}
+          </span>
+        ))}
+      </p>
 
       <div className="hero-content">
         <div className="hero-content__inner">
